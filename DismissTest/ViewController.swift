@@ -1,19 +1,23 @@
-//
-//  ViewController.swift
-//  DismissTest
-//
-//  Created by Ben Rudhart on 26.10.20.
-//
-
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        isModalInPresentation = true
     }
 
+    @IBAction func dismiss() {
+        showSpinner()
 
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    func showSpinner() {
+        let spinner = UIActivityIndicatorView()
+        spinner.startAnimating()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: spinner)
+    }
 }
-
